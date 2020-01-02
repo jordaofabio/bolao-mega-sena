@@ -116,9 +116,8 @@ class App extends Component{
     }
 
     if(!this.state.invalidValue) {
-        const strFinalResult = finalResult.toString();
         for (let i = 0; this.jogos.length > i; i++){
-          if (this.jogos[i].toString() === strFinalResult) {
+          if(this.verifyNumbers(this.jogos[i], finalResult)) {
             this.setState({ win: true });
             break;
           } else {
@@ -126,6 +125,23 @@ class App extends Component{
           }
         }
     }
+  }
+
+  verifyNumbers(game, finalResult) {
+    if (game.length !== finalResult.length) {
+      return false;
+    }
+
+    let result = true;
+
+    for (let i = 0; finalResult.length > i; i++) {
+      if (game.indexOf(finalResult[i]) < 0) {
+        result = false;
+        break;
+      }
+    }
+
+    return result;
   }
 
   render() {
